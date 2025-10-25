@@ -16,7 +16,7 @@
 
 2. Установи зависимости:
 ```
-   pip install -r requirements.txt
+   uv pip install -r requirements.txt
 ```
 
 4. Установи FFmpeg (нужно для чтения MP3, M4A, OGG):
