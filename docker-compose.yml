@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  antispoofing:
+    build: .
+    container_name: antispoofing-service
+    ports:
+      - "8931:8931"
+    volumes:
+      - ./weights:/app/weights
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8931/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

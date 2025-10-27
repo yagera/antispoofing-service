@@ -1,0 +1,10 @@
+[server]
+port = 8931
+address = "0.0.0.0"
+headless = true
+
+[client]
+showErrorDetails = true
+
+[logger]
+level = "info"

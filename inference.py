@@ -22,7 +22,7 @@ class AntiSpoofingModel:
             except Exception:
                 self.device = 'cpu'
 
-        print(f"🖥️  Используется устройство: {self.device.upper()}")
+        print(f"Используется устройство: {self.device.upper()}")
 
         self.model = self._load_model(model_path)
         self.target_sample_rate = 16000
@@ -54,7 +54,7 @@ class AntiSpoofingModel:
             return waveform, original_channels
 
         except Exception as e:
-            print(f"⚠️  Librosa failed, trying torchaudio: {e}")
+            print(f"Librosa failed, trying torchaudio: {e}")
             try:
                 waveform, sample_rate = torchaudio.load(file_path)
                 original_channels = waveform.size(0)
