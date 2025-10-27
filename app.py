@@ -40,7 +40,7 @@ st.markdown("---")
 
 uploaded_file = st.file_uploader(
     "Загрузите аудиофайл",
-    type=['wav', 'mp3', 'flac', 'ogg', 'm4a'],
+    type=['wav', 'mp3', 'flac', 'ogg', 'm4a', 'opus'],
     help="Поддерживаемые форматы: WAV, MP3, FLAC, OGG, M4A"
 )
 
