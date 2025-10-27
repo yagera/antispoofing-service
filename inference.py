@@ -107,5 +107,5 @@ class AntiSpoofingModel:
         return results
 
 def predict_audio(file_path: str, model_path: str = "weights/torch_script_weigths.pt") -> List[Dict]:
-    model = AntiSpoofingModel(model_path)
+    model = AntiSpoofingModel(model_path, device='cpu')
     return model.predict(file_path)
