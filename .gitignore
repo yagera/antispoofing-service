@@ -50,7 +50,6 @@ logs/
 .idea/
 *.sublime-project
 *.sublime-workspace
-
 .ipynb_checkpoints
 
 .streamlit/
@@ -85,3 +84,5 @@ poetry.lock
 Pipfile.lock
 *.conda
 *.yml.lock
+
+config.yaml
