@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   antispoofing:
@@ -8,13 +8,11 @@ services:
       - "8931:8931"
     volumes:
       - ./weights:/app/weights
-      - ./logs:/app/logs
-    environment:
-      - PYTHONUNBUFFERED=1
+      - ./config.yaml:/app/config.yaml:ro
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8931/"]
-      interval: 1m
+      interval: 30s
       timeout: 10s
-      retries: 5
-      start_period: 1m
+      retries: 3
+      start_period: 40s
