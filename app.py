@@ -41,7 +41,7 @@ st.markdown("---")
 uploaded_file = st.file_uploader(
     "Загрузите аудиофайл",
     type=['wav', 'mp3', 'flac', 'ogg', 'm4a', 'opus'],
-    help="Поддерживаемые форматы: WAV, MP3, FLAC, OGG, M4A"
+    help="Поддерживаемые форматы: WAV, MP3, FLAC, OGG, M4A, OPUS"
 )
 
 if uploaded_file is not None:
@@ -189,8 +189,3 @@ if uploaded_file is not None:
                     os.unlink(tmp_path)
 
 st.markdown("---")
-st.markdown("""
-<div style='text-align: center; color: gray;'>
-    <p>Audio Anti-Spoofing Detection Service</p>
-</div>
-""", unsafe_allow_html=True)
