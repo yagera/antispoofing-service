@@ -7,6 +7,7 @@ def apply_random_segment_extraction(
         target_length: int = 64600
 ) -> torch.Tensor:
     processed_tensor = input_tensor.clone()
+
     while processed_tensor.ndim > 1:
         processed_tensor = processed_tensor.squeeze(0)
 
@@ -18,5 +19,4 @@ def apply_random_segment_extraction(
 
     repetition_factor = (target_length // current_length) + 1
     extended_tensor = processed_tensor.repeat(repetition_factor)
-
     return extended_tensor[:target_length]
