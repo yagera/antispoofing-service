@@ -1,48 +1,46 @@
-version: "3.8"
+version: '3.8'
 
 services:
   api:
     build:
       context: .
       dockerfile: api/Dockerfile
-    container_name: antispoofing-api
     ports:
       - "8000:8000"
     volumes:
-      - ./weights:/app/weights:ro
-      - uploads:/app/uploads
-    restart: always
+      - ./weights:/app/weights
+      - ./uploads:/app/uploads
+    environment:
+      - PYTHONUNBUFFERED=1
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
     networks:
-      - antispoofing-network
+      - app-network
 
   ui:
     build:
       context: .
       dockerfile: ui/Dockerfile
-    container_name: antispoofing-ui
     ports:
       - "8931:8931"
     depends_on:
       - api
-    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_URL=http://api:8000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8931/_stcore/health"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8931/_stcore/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
     networks:
-      - antispoofing-network
-
-volumes:
-  uploads:
+      - app-network
 
 networks:
-  antispoofing-network:
+  app-network:
     driver: bridge
