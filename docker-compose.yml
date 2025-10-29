@@ -12,12 +12,12 @@ services:
       - ./uploads:/app/uploads
     environment:
       - PYTHONUNBUFFERED=1
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+    #healthcheck:
+      #test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
+      #interval: 30s
+      #timeout: 10s
+      #retries: 3
+      #start_period: 40s
     networks:
       - app-network
 
@@ -32,12 +32,12 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - API_URL=http://api:8000
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:8931/_stcore/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
+    #healthcheck:
+      #test: ["CMD", "curl", "-f", "http://127.0.0.1:8931/_stcore/health"]
+      #interval: 30s
+      #timeout: 10s
+      #retries: 3
+      #start_period: 60s
     networks:
       - app-network
 
