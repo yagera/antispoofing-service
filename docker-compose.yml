@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: api/Dockerfile
+    container_name: antispoofing-api
     ports:
       - "8000:8000"
     volumes:
@@ -12,12 +13,13 @@ services:
       - ./uploads:/app/uploads
     environment:
       - PYTHONUNBUFFERED=1
-    #healthcheck:
-      #test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
-      #interval: 30s
-      #timeout: 10s
-      #retries: 3
-      #start_period: 40s
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     networks:
       - app-network
 
@@ -25,19 +27,22 @@ services:
     build:
       context: .
       dockerfile: ui/Dockerfile
+    container_name: antispoofing-ui
     ports:
       - "8931:8931"
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     environment:
       - PYTHONUNBUFFERED=1
       - API_URL=http://api:8000
-    #healthcheck:
-      #test: ["CMD", "curl", "-f", "http://127.0.0.1:8931/_stcore/health"]
-      #interval: 30s
-      #timeout: 10s
-      #retries: 3
-      #start_period: 60s
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8931/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
     networks:
       - app-network
 
